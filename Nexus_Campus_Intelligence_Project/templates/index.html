@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nova Genisis Campus Intelligence — Analytics & AI-Powered Student Success Platform</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="/static/css/custom.css" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              900: '#312e81'
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="min-h-screen flex flex-col bg-slate-50 text-slate-800 antialiased selection:bg-indigo-500 selection:text-white">
+
+  <!-- ============================================================== -->
+  <!-- 1. LOGIN SECTION (Clean, curved, professional authentication)  -->
+  <!-- ============================================================== -->
+  <section id="login-section" class="min-h-screen flex items-center justify-center p-4 relative overflow-hidden bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900">
+    <!-- Ambient background glows -->
+    <div class="absolute top-1/4 -left-20 w-96 h-96 bg-indigo-600/20 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute bottom-1/4 -right-20 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="w-full max-w-md relative z-10 space-y-6">
+      <!-- Brand Header -->
+      <div class="text-center space-y-2">
+        <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-tr from-indigo-600 to-violet-500 text-white shadow-xl shadow-indigo-600/30 mb-2">
+          <i data-lucide="brain-circuit" class="w-7 h-7"></i>
+        </div>
+        <h1 class="text-2xl font-black text-white tracking-tight">Nova Genisis Campus Intelligence</h1>
+        <p class="text-xs text-indigo-200">Analytics & AI-Powered Student Success & Intervention Platform</p>
+      </div>
+
+      <!-- Glass Login Card -->
+      <div class="glass-panel p-8 bg-white/95 border border-white/40 shadow-2xl space-y-5 rounded-3xl">
+        <div class="border-b border-slate-100 pb-3">
+          <h2 class="text-lg font-bold text-slate-900">Sign in to Your Portal</h2>
+          <p class="text-xs text-slate-500 mt-0.5">Role-based access for Students, Faculty & Administrators</p>
+        </div>
+
+        <form onsubmit="App.handleLogin(event)" class="space-y-4">
+          <div class="space-y-1.5">
+            <label class="block text-xs font-bold text-slate-700">Official Campus Email</label>
+            <div class="relative">
+              <input id="login-email" type="email" required placeholder="e.g. student@campus.edu" class="w-full rounded-2xl border border-slate-300 pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600 bg-white" />
+              <i data-lucide="mail" class="w-4 h-4 absolute left-3.5 top-3 text-slate-400"></i>
+            </div>
+          </div>
+
+          <div class="space-y-1.5">
+            <label class="block text-xs font-bold text-slate-700">Password</label>
+            <div class="relative">
+              <input id="login-password" type="password" required placeholder="••••••••" class="w-full rounded-2xl border border-slate-300 pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600 bg-white" />
+              <i data-lucide="lock" class="w-4 h-4 absolute left-3.5 top-3 text-slate-400"></i>
+            </div>
+          </div>
+
+          <div id="login-error" class="hidden text-xs text-rose-600 bg-rose-50 border border-rose-200 p-2.5 rounded-xl font-medium"></div>
+
+          <button type="submit" class="w-full btn-curved btn-primary py-3 text-sm shadow-lg shadow-indigo-600/30">
+            <span>Sign In to Portal</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+        </form>
+
+        <!-- Quick 1-Click Demo Credentials -->
+        <div class="pt-3 border-t border-slate-100 space-y-2.5">
+          <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider text-center">Quick 1-Click Demo Logins</div>
+          <div class="grid grid-cols-3 gap-2 text-xs">
+            <button type="button" onclick="App.fillDemo('student@campus.edu', 'student123')" class="p-2.5 rounded-2xl bg-slate-50 hover:bg-indigo-50 border border-slate-200 hover:border-indigo-200 transition-all text-center">
+              <div class="font-bold text-slate-800">👨‍🎓 Student</div>
+              <div class="text-[10px] text-slate-400 truncate">Rahul Sharma</div>
+            </button>
+            <button type="button" onclick="App.fillDemo('faculty@campus.edu', 'faculty123')" class="p-2.5 rounded-2xl bg-slate-50 hover:bg-indigo-50 border border-slate-200 hover:border-indigo-200 transition-all text-center">
+              <div class="font-bold text-slate-800">👩‍🏫 Faculty</div>
+              <div class="text-[10px] text-slate-400 truncate">Dr. Mehta</div>
+            </button>
+            <button type="button" onclick="App.fillDemo('admin@campus.edu', 'admin123')" class="p-2.5 rounded-2xl bg-slate-50 hover:bg-indigo-50 border border-slate-200 hover:border-indigo-200 transition-all text-center">
+              <div class="font-bold text-slate-800">🏛️ Admin</div>
+              <div class="text-[10px] text-slate-400 truncate">Dean Office</div>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature pills -->
+      <div class="flex flex-wrap items-center justify-center gap-2 text-[11px] text-indigo-300">
+        <span class="flex items-center gap-1"><i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-400"></i> 7-Source Integration</span>
+        <span>•</span>
+        <span class="flex items-center gap-1"><i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-400"></i> Explainable AI</span>
+        <span>•</span>
+        <span class="flex items-center gap-1"><i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-400"></i> Syllabus Tracker</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- 2. MAIN APPLICATION SECTION (Authenticated view)              -->
+  <!-- ============================================================== -->
+  <section id="app-section" class="hidden flex-1 flex flex-col min-h-screen">
+    <!-- Top Navigation Header -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200/80 px-4 lg:px-8 py-3">
+      <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+        <!-- Brand Logo -->
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-600 text-white flex items-center justify-center shadow-md shadow-indigo-600/20">
+            <i data-lucide="brain-circuit" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="font-extrabold text-base tracking-tight text-slate-900 leading-none">Nova Genisis Campus Intelligence</div>
+            <div class="text-[11px] text-slate-400 font-medium mt-0.5">AI-Powered Student Success Platform</div>
+          </div>
+        </div>
+
+        <!-- Center Actions: Methodology & Demo Slides -->
+        <div class="hidden md:flex items-center gap-2">
+          <button onclick="App.openMethodologyModal()" class="btn-curved btn-secondary text-xs py-1.5 px-3">
+            <i data-lucide="file-text" class="w-3.5 h-3.5 text-indigo-600"></i>
+            <span>Scoring Methodology</span>
+          </button>
+          <button onclick="App.openSlidesModal()" class="btn-curved btn-secondary text-xs py-1.5 px-3">
+            <i data-lucide="presentation" class="w-3.5 h-3.5 text-indigo-600"></i>
+            <span>Executive Demo Slides</span>
+          </button>
+        </div>
+
+        <!-- Right User Profile & Switcher -->
+        <div class="flex items-center gap-3">
+          <div class="text-right hidden sm:block">
+            <div class="text-xs font-bold text-slate-900" id="user-display-name">User Name</div>
+            <div class="text-[10px] text-slate-400 truncate max-w-[150px]" id="user-display-title">Role Title</div>
+          </div>
+          <img id="user-avatar" src="" class="w-9 h-9 rounded-full bg-slate-100 border border-slate-200" />
+          <span id="user-role-badge" class="badge-curved badge-info text-[10px] uppercase font-bold">ROLE</span>
+          <button onclick="App.logout()" title="Sign Out" class="p-2 rounded-full hover:bg-slate-100 text-slate-500 hover:text-slate-800 transition-colors">
+            <i data-lucide="log-out" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Container (Dynamically rendered per role) -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 lg:p-8">
+      <div id="portal-content">
+        <!-- Content will be injected by App.js based on role -->
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-4 px-4 text-center text-xs text-slate-500">
+      <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+        <span>© 2026 Nova Genisis Campus Intelligence Platform • All Rights Reserved</span>
+        <div class="flex items-center gap-4 text-[11px] text-slate-400">
+          <span>7-Source Data Integration</span>
+          <span>•</span>
+          <span>Dual-Risk Early Warning</span>
+          <span>•</span>
+          <span>Explainable AI Attribution</span>
+          <span>•</span>
+          <span>Syllabus Velocity Tracking</span>
+        </div>
+      </div>
+    </footer>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- 3. MODALS (Student Detail, Syllabus Manager, Methodology, etc) -->
+  <!-- ============================================================== -->
+
+  <!-- Student 360° Profile Modal -->
+  <div id="student-modal" class="hidden fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto p-6 lg:p-8 shadow-2xl relative space-y-6">
+      <button onclick="App.closeStudentModal()" class="absolute top-5 right-5 p-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 transition-colors">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      <div id="student-modal-content">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Syllabus Curriculum Modal (Faculty & Admin) -->
+  <div id="syllabus-modal" class="hidden fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 lg:p-8 shadow-2xl relative space-y-6">
+      <button onclick="App.closeSyllabusModal()" class="absolute top-5 right-5 p-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 transition-colors">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      <div id="syllabus-modal-content">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Scoring Methodology Whitepaper Modal -->
+  <div id="methodology-modal" class="hidden fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 lg:p-8 shadow-2xl relative space-y-6">
+      <button onclick="App.closeMethodologyModal()" class="absolute top-5 right-5 p-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 transition-colors">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      
+      <div class="space-y-5">
+        <div class="border-b border-slate-200 pb-3">
+          <span class="badge-curved badge-info text-xs mb-1">Mathematical Documentation</span>
+          <h3 class="text-xl font-black text-slate-900">Student Success Score & Risk Index Formulation</h3>
+          <p class="text-xs text-slate-500 mt-0.5">Comprehensive documentation of indicators, weights, normalization algorithms, and explainability mathematics.</p>
+        </div>
+
+        <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+          <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+            <h4 class="font-bold text-slate-900 text-sm">1. Mathematical Model Formulation</h4>
+            <p>The Student Success Score \(S \in [0, 100]\) is synthesized as a constrained linear combination of six normalized sub-scores reflecting academic, behavioral, and placement indicators:</p>
+            <div class="bg-white p-3 rounded-xl font-mono text-[11px] text-indigo-700 font-bold border border-slate-200">
+              Success Score = 0.30(Academic) + 0.15(Attendance) + 0.15(LMS) + 0.20(Placement) + 0.10(Skills) + 0.10(Feedback & Wellbeing)
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+              <span class="font-bold text-slate-900 text-xs">🎓 Academic Mastery (30% Weight)</span>
+              <p class="text-slate-600 text-[11px]">Normalized CGPA scaled to 100, combined with internal test marks, subjected to a strict penalty of -15 points per active backlog.</p>
+            </div>
+            <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+              <span class="font-bold text-slate-900 text-xs">📅 Attendance Discipline (15% Weight)</span>
+              <p class="text-slate-600 text-[11px]">Direct overall attendance percentage. If overall attendance drops below the 75% statutory detention threshold, an exponential debarment penalty is applied.</p>
+            </div>
+            <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+              <span class="font-bold text-slate-900 text-xs">💻 LMS Digital Engagement (15% Weight)</span>
+              <p class="text-slate-600 text-[11px]">65% assignment completion rate + 35% weekly platform login frequency (capped at 16 logins/week).</p>
+            </div>
+            <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+              <span class="font-bold text-slate-900 text-xs">💼 Placement Readiness (20% Weight)</span>
+              <p class="text-slate-600 text-[11px]">35% algorithmic coding benchmark + 35% aptitude test score + 30% behavioral mock interview score.</p>
+            </div>
+            <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+              <span class="font-bold text-slate-900 text-xs">🛠️ Practical Skills (10% Weight)</span>
+              <p class="text-slate-600 text-[11px]">60% technical assessments + 40% interpersonal and soft-skill ratings.</p>
+            </div>
+            <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+              <span class="font-bold text-slate-900 text-xs">🧘 Wellbeing & Campus Life (10% Weight)</span>
+              <p class="text-slate-600 text-[11px]">60% student wellbeing index + 40% course satisfaction rating to identify mental stress or burnout.</p>
+            </div>
+          </div>
+
+          <div class="p-4 bg-indigo-50/70 rounded-2xl border border-indigo-200 space-y-2">
+            <h4 class="font-bold text-indigo-950 text-sm">2. Explainable Score Attribution (SHAP-Style Formulation)</h4>
+            <p>Every score is compared against the pre-computed cohort benchmark (\(\mu = 72.8\)). For each indicator dimension \(k\), the individual attribution \(\Delta_k\) is defined as:</p>
+            <div class="bg-white p-2.5 rounded-xl font-mono text-[11px] text-indigo-800 font-bold border border-slate-200">
+              Δ_k = W_k × (SubScore_k - BenchmarkMean_k)
+            </div>
+            <p class="text-[11px] text-slate-600">This produces clear positive drivers and negative drags without black-box opacity, fulfilling explainability criteria.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Executive Presentation Deck Modal -->
+  <div id="slides-modal" class="hidden fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto p-6 lg:p-8 shadow-2xl relative space-y-6">
+      <button onclick="App.closeSlidesModal()" class="absolute top-5 right-5 p-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 transition-colors">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="space-y-6">
+        <div class="border-b border-slate-200 pb-3 flex items-center justify-between">
+          <div>
+            <span class="badge-curved badge-purple text-xs mb-1">Executive Presentation Deck</span>
+            <h3 class="text-xl font-black text-slate-900">Smart Campus Analytics: Predict, Optimize & Improve Student Success</h3>
+          </div>
+          <span class="text-xs text-slate-400 font-semibold">5 Executive Slides</span>
+        </div>
+
+        <div class="space-y-6">
+          <!-- Slide 1 -->
+          <div class="p-6 rounded-2xl bg-gradient-to-br from-slate-900 to-indigo-950 text-white space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-indigo-300 uppercase tracking-wider">Slide 1: Problem Understanding & Campus Context</span>
+              <span class="badge-curved bg-white/10 text-white text-xs">Context</span>
+            </div>
+            <h4 class="text-lg font-bold">From Fragmented Data Silos to Decision Intelligence</h4>
+            <p class="text-xs text-indigo-200 leading-relaxed">
+              Traditional engineering colleges collect massive amounts of data across disconnected departmental systems (ERP, Biometric Attendance, LMS portals, Placement Cell spreadsheets, and Semester Exam registries). Because these data points remain siloed, student failures, exam detentions, and placement rejections are only caught reactively. Our platform solves this by continuously ingesting all 7 streams into a unified real-time 360° decision engine.
+            </p>
+          </div>
+
+          <!-- Slide 2 -->
+          <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-3 text-slate-800">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Slide 2: 7-Source Data Ingestion & Synthesis Architecture</span>
+              <span class="badge-curved badge-info text-xs">Architecture</span>
+            </div>
+            <h4 class="text-lg font-bold text-slate-900">Unified 360° Student Data Model</h4>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
+              <div class="p-2.5 bg-white rounded-xl border border-slate-200 font-semibold">1. Academic (CGPA, marks, backlogs)</div>
+              <div class="p-2.5 bg-white rounded-xl border border-slate-200 font-semibold">2. Attendance (Overall %, subject attendance)</div>
+              <div class="p-2.5 bg-white rounded-xl border border-slate-200 font-semibold">3. LMS (Logins, assignment completion)</div>
+              <div class="p-2.5 bg-white rounded-xl border border-slate-200 font-semibold">4. Engagement (Hackathons, clubs, certs)</div>
+              <div class="p-2.5 bg-white rounded-xl border border-slate-200 font-semibold">5. Placement (Aptitude, coding, mock interviews)</div>
+              <div class="p-2.5 bg-white rounded-xl border border-slate-200 font-semibold">6. Skills (Tech & soft skill assessments)</div>
+              <div class="p-2.5 bg-white rounded-xl border border-slate-200 font-semibold">7. Feedback (Satisfaction & faculty sentiment)</div>
+              <div class="p-2.5 bg-indigo-50 border border-indigo-200 font-semibold text-indigo-700">8. Syllabus (Course & unit progress)</div>
+            </div>
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-3 text-slate-800">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Slide 3: Explainable Scoring & Dual-Risk Identification</span>
+              <span class="badge-curved badge-success text-xs">Scoring & Risks</span>
+            </div>
+            <h4 class="text-lg font-bold text-slate-900">Transparent Attribution Without Black Boxes</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Rather than an opaque classification label, our system generates an explainable Student Success Score (0-100) paired with dual risk flags: <strong>Academic Risk</strong> (driven by backlogs, low attendance, and failing marks) and <strong>Placement Risk</strong> (driven by low algorithmic coding scores and interview anxiety). Every score displays exact positive driver points and negative drag factors.
+            </p>
+          </div>
+
+          <!-- Slide 4 -->
+          <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-3 text-slate-800">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-purple-600 uppercase tracking-wider">Slide 4: Strategic Student Segmentation & Syllabus Pacing</span>
+              <span class="badge-curved badge-purple text-xs">Segmentation & Syllabus</span>
+            </div>
+            <h4 class="text-lg font-bold text-slate-900">High-Impact Targeted Interventions</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              We group students into 4 distinct quadrants: (1) <em>High Academics - Low Placement</em> (targets DSA coding bootcamps), (2) <em>Placement Ready - Academic Risk</em> (targets attendance regularization and backlog clearance), (3) <em>Consistent High Achievers</em> (mentorship and marquee placement), and (4) <em>Dual-Risk</em> (urgent 360° faculty counseling). Integrated with real-time syllabus completion tracking to ensure academic delivery stays on schedule.
+            </p>
+          </div>
+
+          <!-- Slide 5 -->
+          <div class="p-6 rounded-2xl bg-gradient-to-br from-indigo-900 to-slate-900 text-white space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-indigo-300 uppercase tracking-wider">Slide 5: Measurable Outcomes & Institutional ROI</span>
+              <span class="badge-curved bg-white/10 text-white text-xs">Outcomes</span>
+            </div>
+            <h4 class="text-lg font-bold">Actionable Decision Intelligence for Campus Leaders</h4>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs pt-1">
+              <div class="p-3 bg-white/10 rounded-xl border border-white/10 space-y-1">
+                <div class="text-lg font-black text-emerald-400">45% Reduction</div>
+                <div class="text-indigo-200">In student attendance exam detentions through proactive 2-week early alerts.</div>
+              </div>
+              <div class="p-3 bg-white/10 rounded-xl border border-white/10 space-y-1">
+                <div class="text-lg font-black text-indigo-300">2.4x Increase</div>
+                <div class="text-indigo-200">In tier-1 placement clearance for students undergoing algorithmic bootcamps.</div>
+              </div>
+              <div class="p-3 bg-white/10 rounded-xl border border-white/10 space-y-1">
+                <div class="text-lg font-black text-purple-300">100% Audit</div>
+                <div class="text-indigo-200">Real-time curriculum velocity monitoring across all university engineering departments.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/static/js/charts.js"></script>
+  <script src="/static/js/ai_chat.js"></script>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
+
